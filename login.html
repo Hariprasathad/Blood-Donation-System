@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Blood Donation - Login/Register</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      background: linear-gradient(to right, #d32f2f, #f44336);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: #fff;
+      width: 400px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+    .tab-header {
+      display: flex;
+    }
+    .tab-header div {
+      flex: 1;
+      text-align: center;
+      padding: 15px;
+      cursor: pointer;
+      font-weight: bold;
+      background: #eee;
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+    .tab-header .active {
+      background: #d32f2f;
+      color: white;
+    }
+    form {
+      padding: 30px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #d32f2f;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #b71c1c;
+    }
+    .message {
+      color: red;
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+  <script>
+    function showTab(tab) {
+      document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
+      document.getElementById('registerForm').style.display = tab === 'register' ? 'block' : 'none';
+
+      document.getElementById('loginTab').classList.toggle('active', tab === 'login');
+      document.getElementById('registerTab').classList.toggle('active', tab === 'register');
+    }
+    window.onload = () => showTab('login');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="tab-header">
+      <div id="loginTab" onclick="showTab('login')">Login</div>
+      <div id="registerTab" onclick="showTab('register')">Register</div>
+    </div>
+
+    <!-- Flash message -->
+    <!-- {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="message">
+          {% for msg in messages %}
+            <p>{{ msg }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %} -->
+
+    <form id="loginForm" method="POST" action="{{ url_for('login') }}">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" name="password" required />
+      </div>
+      <button type="submit">Login</button>
+    </form>
+
+    <form id="registerForm" method="POST" action="{{ url_for('register') }}" style="display:none;">
+      <div class="form-group">
+        <label for="name">Full Name:</label>
+        <input type="text" name="name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="text" name="phone" />
+      </div>
+      <div class="form-group">
+        <label for="blood_group">Blood Group:</label>
+        <select name="blood_group" required>
+          <option value="">Select</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" name="password" required />
+      </div>
+      <button type="submit">Register</button>
+    </form>
+  </div>
+</body>
+</html>
