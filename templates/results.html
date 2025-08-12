@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h2>Donor List</h2>
+{% if donors %}
+    <ul>
+        {% for donor in donors %}
+            <li>{{ donor.name }} - {{ donor.blood_group }} - {{ donor.phone }} (Pincode: {{ donor.pincode }})</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No donors found nearby.</p>
+{% endif %}
+<a href="/">Back to Home</a>
+</body>
+</html>
