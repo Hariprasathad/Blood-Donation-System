@@ -1,0 +1,29 @@
+CREATE DATABASE blood_db;
+USE blood_db;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    phone VARCHAR(15),
+    password VARCHAR(100)
+);
+
+CREATE TABLE donors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    blood_group VARCHAR(10),
+    phone VARCHAR(15),
+    city VARCHAR(100),
+    units INT,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE approvals (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    donor_id INT,
+    approved_by INT,
+    approved_at DATETIME,
+    FOREIGN KEY (donor_id) REFERENCES donors(id),
+    FOREIGN KEY (approved_by) REFERENCES users(id)
+);
