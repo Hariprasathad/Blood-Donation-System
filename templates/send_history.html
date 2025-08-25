@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blood Submission History</title>
+    <style>
+        body { font-family: Arial; background: #f7f7f7; padding: 30px; }
+        h2 { color: #c0392b; }
+        table { border-collapse: collapse; width: 100%; background: #fff; box-shadow: 0 0 10px #ccc; border-radius: 10px; }
+        th, td { padding: 10px; border-bottom: 1px solid #ddd; }
+        th { background: #c0392b; color: white; }
+        tr:hover { background: #f2f2f2; }
+        a { display: inline-block; margin-top: 15px; color: #2980b9; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h2>Blood Submission History</h2>
+
+    {% if history %}
+        <table>
+            <tr>
+                <th>Donor Name</th>
+                <th>Donor Email</th>
+                <th>Donor Phone</th>
+                <th>Address</th>
+                <th>Blood Group</th>
+                <th>Units</th>
+                <th>Approved By</th>
+                <th>Approver Email</th>
+                <th>Approver Phone</th>
+                <th>Approved At</th>
+            </tr>
+            {% for entry in history %}
+            <tr>
+                <td>{{ entry.donor_name }}</td>
+                <td>{{ entry.donor_email }}</td>
+                <td>{{ entry.donor_phone }}</td>
+                <td>{{ entry.city }}</td>
+                <td>{{ entry.blood_group }}</td>
+                <td>{{ entry.units }}</td>
+                <td>{{ entry.approver_name if entry.approver_name else "Pending" }}</td>
+                <td>{{ entry.approver_email if entry.approver_email else "Pending" }}</td>
+                <td>{{ entry.approver_phone if entry.approver_phone else "Pending" }}</td>
+                <td>{{ entry.approved_at if entry.approved_at else "Pending" }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No submissions yet.</p>
+    {% endif %}
+
+    <a href="{{ url_for('dashboard') }}">⬅ Back to Dashboard</a>
+</body>
+</html>

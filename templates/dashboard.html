@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f7f7f7; text-align: center; padding: 50px; }
+        h2 { color: #2c3e50; margin-bottom: 30px; }
+        .card-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .card {
+            background: #fff;
+            width: 220px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .card:hover { transform: scale(1.05); }
+        .send { background: #e74c3c; color: white; }
+        .send:hover { background: #c0392b; }
+        .send-history { background: #d35400; color: white; }
+        .send-history:hover { background: #e67e22; }
+        .receive { background: #27ae60; color: white; }
+        .receive:hover { background: #2ecc71; }
+        .receive-history { background: #2980b9; color: white; }
+        .receive-history:hover { background: #3498db; }
+        .logout { margin-top: 40px; display: inline-block; background: #7f8c8d; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; }
+        .logout:hover { background: #95a5a6; }
+    </style>
+</head>
+<body>
+    <h2>Welcome, {{ session['user_name'] }} 👋</h2>
+
+    <div class="card-container">
+        <a href="{{ url_for('send') }}" class="card send">Send Blood</a>
+        <a href="{{ url_for('send_history') }}" class="card send-history">Send History</a>
+        <a href="{{ url_for('received_request') }}" class="card receive">Received Requests</a>
+        <a href="{{ url_for('receive_history') }}" class="card receive-history">Received History</a>
+    </div>
+
+    <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+</body>
+</html>

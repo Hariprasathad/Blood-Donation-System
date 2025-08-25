@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Approved Requests</title>
+    <style>
+        body { font-family: Arial; background: #f7f7f7; padding: 30px; }
+        h2 { color: #27ae60; }
+        table { border-collapse: collapse; width: 100%; background: #fff; box-shadow: 0 0 10px #ccc; border-radius: 10px; }
+        th, td { padding: 10px; border-bottom: 1px solid #ddd; }
+        th { background: #27ae60; color: white; }
+        tr:hover { background: #f2f2f2; }
+        a { display: inline-block; margin-top: 15px; color: #2980b9; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h2>My Approved Donor Requests</h2>
+
+    {% if history %}
+        <table>
+            <tr>
+                <th>Donor Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>City</th>
+                <th>Blood Group</th>
+                <th>Units</th>
+                <th>Approved At</th>
+            </tr>
+            {% for h in history %}
+            <tr>
+                <td>{{ h.donor_name }}</td>
+                <td>{{ h.donor_email }}</td>
+                <td>{{ h.donor_phone }}</td>
+                <td>{{ h.city }}</td>
+                <td>{{ h.blood_group }}</td>
+                <td>{{ h.units }}</td>
+                <td>{{ h.approved_at }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>You have not approved any requests yet.</p>
+    {% endif %}
+
+    <a href="{{ url_for('dashboard') }}">⬅ Back to Dashboard</a>
+</body>
+</html>

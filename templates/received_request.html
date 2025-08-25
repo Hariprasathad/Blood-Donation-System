@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Received Requests</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            padding: 30px;
+        }
+        h2 {
+            color: #2980b9;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px #ccc;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            background-color: #2980b9;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            text-decoration: none;
+            color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h2>Received Requests</h2>
+
+    {% if requests %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Blood Group</th>
+            <th>Phone</th>
+            <th>City</th>
+            <th>Requested At</th>
+        </tr>
+        {% for r in requests %}
+        <tr>
+            <td>{{ r.id }}</td>
+            <td>{{ r.name }}</td>
+            <td>{{ r.blood_group }}</td>
+            <td>{{ r.phone }}</td>
+            <td>{{ r.city }}</td>
+            <td>{{ r.requested_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No received requests found.</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('dashboard') }}">⬅ Back to Dashboard</a>
+</body>
+</html>

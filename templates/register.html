@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            padding: 40px;
+            text-align: center;
+        }
+        h2 {
+            color: #27ae60;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 350px;
+            margin: auto;
+            box-shadow: 0 0 10px #ccc;
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #27ae60;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #2ecc71;
+        }
+        a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+        .flash {
+            margin-bottom: 10px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h2>Register</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">{{ messages[0] }}</div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="post">
+        <input name="name" placeholder="Name" required><br>
+        <input name="email" placeholder="Email" type="email" required><br>
+        <input name="phone" placeholder="Phone" required><br>
+        <input name="blood_group" placeholder="Blood Group" required><br>
+        <input name="address" placeholder="Address"><br>
+        <input name="password" placeholder="Password" type="password" required><br>
+        <button type="submit">Register</button>
+    </form>
+
+    <p>Already registered? <a href="{{ url_for('login') }}">Login</a></p>
+</body>
+</html>
