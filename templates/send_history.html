@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+
+{% block title %}My Requests - BloodLink{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-history text-primary"></i> My Blood Requests</h2>
+        <span class="text-light">Track the status of your posted requests</span>
+    </div>
+
+    {% if history %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th><i class="fas fa-droplet"></i> Group</th>
+                    <th><i class="fas fa-vial"></i> Units</th>
+                    <th><i class="fas fa-hospital"></i> Location</th>
+                    <th><i class="fas fa-comment-dots"></i> Description</th>
+                    <th><i class="fas fa-phone"></i> Contact</th>
+                    <th><i class="fas fa-info-circle"></i> Status</th>
+                    <th><i class="fas fa-user-check"></i> Donor</th>
+                    <th><i class="fas fa-clock"></i> Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in history %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td><span class="badge badge-warning">{{ entry.blood_group }}</span></td>
+                    <td>{{ entry.units }}</td>
+                    <td>{{ entry.city }}</td>
+                    <td style="white-space: pre-line; max-width: 200px; font-size: 0.85rem;">{{ entry.description if
+                        entry.description else "-" }}</td>
+                    <td>{{ entry.donor_phone }}</td>
+                    <td>
+                        {% if entry.approved_at %}
+                        <span class="badge badge-success"><i class="fas fa-check"></i> Fulfilled</span>
+                        {% else %}
+                        <span class="badge badge-warning"><i class="fas fa-spinner fa-spin"></i> Pending</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <strong>{{ entry.approver_name if entry.approver_name else "-" }}</strong>
+                        {% if entry.approver_phone %}
+                        <br>
+                        <a href="tel:{{ entry.approver_phone }}" class="btn-text text-success"
+                            style="font-size: 0.8rem;" title="Call Donor">
+                            <i class="fas fa-phone"></i> {{ entry.approver_phone }}
+                        </a>
+                        {% endif %}
+                    </td>
+                    <td><small>{{ entry.approved_at if entry.approved_at else "-" }}</small></td>
+                    <td>
+                        {% if not entry.approved_at %}
+                        <form action="{{ url_for('delete_request', request_id=entry.id) }}" method="post"
+                            onsubmit="return confirm('Remove this request?');">
+                            <button type="submit" class="btn btn-secondary"
+                                style="padding: 6px 12px; font-size: 0.8rem; border-color: var(--danger); color: var(--danger);">
+                                <i class="fas fa-trash-can"></i> Cancel
+                            </button>
+                        </form>
+                        {% else %}
+                        <i class="fas fa-lock text-muted" title="Cannot delete fulfilled requests"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <i class="fas fa-folder-open fa-3x text-light mb-3"></i>
+        <h3 class="text-secondary">No requests found</h3>
+        <p>You haven't posted any blood requests yet.</p>
+        <a href="{{ url_for('send') }}" class="btn btn-primary mt-3">Post a Request Now</a>
+    </div>
+    {% endif %}
+
+    <div style="margin-top: 2rem;">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}

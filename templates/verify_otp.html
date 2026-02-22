@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}Verify OTP - BloodLink{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="card auth-card">
+        <h2 class="text-center mb-4"><i class="fas fa-check-circle"></i> Verify Email</h2>
+        <p class="text-center text-muted">A verification code has been sent to your email.</p>
+
+        <form method="post">
+            <div class="form-group">
+                <label for="otp">Enter OTP</label>
+                <input type="text" id="otp" name="otp" placeholder="Enter 6-digit OTP" required
+                    class="form-control text-center text-large" maxlength="6">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Verify</button>
+        </form>
+
+        <div class="mt-3 text-center">
+            <small>Did not receive the code? <a href="{{ url_for('register') }}">Resend</a></small>
+        </div>
+    </div>
+</div>
+{% endblock %}

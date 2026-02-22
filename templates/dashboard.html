@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block title %}Dashboard - BloodLink{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-banner">
+    <h2>Hello, {{ session.user_name }}! 👋</h2>
+
+</div>
+
+<!-- Action Grid -->
+<div class="dashboard-grid">
+    <!-- Request Card -->
+    <div class="card dashboard-card">
+        <div class="icon-circle">
+            <i class="fas fa-search-location"></i>
+        </div>
+        <h3>Request Blood</h3>
+        <p>Need blood? Submit your request details and find a donor.</p>
+        <a href="{{ url_for('send') }}" class="btn btn-primary">
+            <i class="fas fa-plus-circle"></i> Request Blood
+        </a>
+    </div>
+
+    <!-- Donate Card -->
+    <div class="card dashboard-card">
+        <div class="icon-circle">
+            <i class="fas fa-hand-holding-heart"></i>
+        </div>
+        <h3>Donate Blood</h3>
+        <p>Browse blood requests in your area and offer to donate.</p>
+        <a href="{{ url_for('received_request') }}" class="btn btn-secondary">
+            <i class="fas fa-hand-holding-medical"></i> Donate Now
+        </a>
+    </div>
+
+    <!-- History Card -->
+    <div class="card dashboard-card">
+        <div class="icon-circle">
+            <i class="fas fa-history"></i>
+        </div>
+        <h3>My Requests</h3>
+        <p>Track your blood requests and see if a donor has been found.</p>
+        <a href="{{ url_for('send_history') }}" class="btn btn-secondary">
+            <i class="fas fa-list-alt"></i> View Requests
+        </a>
+    </div>
+
+    <!-- Approvals Card -->
+    <div class="card dashboard-card">
+        <div class="icon-circle">
+            <i class="fas fa-check-double"></i>
+        </div>
+        <h3>My Donations</h3>
+        <p>View requests you have donated to.</p>
+        <a href="{{ url_for('receive_history') }}" class="btn btn-secondary">
+            <i class="fas fa-clipboard-check"></i> View Donations
+        </a>
+    </div>
+</div>
+{% endblock %}

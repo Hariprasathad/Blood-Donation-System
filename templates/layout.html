@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BloodLink - Every Drop Counts{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="/" class="brand">
+            <i class="fas fa-droplet"></i> <span>BloodLink</span>
+        </a>
+        <div class="nav-links">
+            {% if session.get('user_id') %}
+            <a href="{{ url_for('dashboard') }}"
+                class="{% if request.endpoint == 'dashboard' %}active{% endif %}">Dashboard</a>
+            <a href="{{ url_for('logout') }}" class="btn-logout"><i class="fas fa-power-off"></i></a>
+            {% else %}
+            <a href="{{ url_for('login') }}" class="{% if request.endpoint == 'login' %}active{% endif %}">Login</a>
+            <a href="{{ url_for('register') }}" class="active">Get Started</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="alerts-container">
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                <i
+                    class="fas {% if category == 'success' %}fa-circle-check{% else %}fa-circle-exclamation{% endif %}"></i>
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="ticker-wrapper" style="box-shadow: none; border-top: 1px solid var(--glass-border);">
+            <div class="ticker-content">
+                <!-- Set 1 -->
+                <span class="ticker-item"><i class="fas fa-hand-holding-droplet"></i> Connecting Donors. Saving
+                    Lives.</span>
+                <span class="ticker-item"><i class="fas fa-hand-holding-droplet"></i> தானதாரர்களை இணைத்து, உயிர்களை
+                    காப்போம்.</span>
+                <span class="ticker-item"><i class="fas fa-hand-holding-droplet"></i> दानदाताओं को जोड़ते हुए, जीवन
+                    बचाते हैं।</span>
+                <span class="ticker-item"><i class="fas fa-hand-holding-droplet"></i> దాతలను కలుపుతూ, ప్రాణాలను
+                    కాపాడుతూ.</span>
+                <span class="ticker-item"><i class="fas fa-hand-holding-droplet"></i> ദാതാക്കളെ ബന്ധിപ്പിച്ച്, ജീവൻ
+                    രക്ഷിക്കുന്നു.</span>
+                <span class="ticker-item"><i class="fas fa-hand-holding-droplet"></i> ದಾನಿಗಳನ್ನು ಸಂಪರ್ಕಿಸಿ, ಜೀವಗಳನ್ನು
+                    ಉಳಿಸುತ್ತೇವೆ.</span>
+                <span class="ticker-item"><i class="fas fa-hand-holding-droplet"></i> দাতাদের সংযুক্ত করে, জীবন
+                    বাঁচাই।</span>
+                <span class="ticker-item" dir="rtl"><i class="fas fa-hand-holding-droplet"></i> ربط المتبرعين. إنقاذ
+                    الأرواح.</span>
+                <!-- Set 2 (Duplicate) -->
+                <span class="ticker-item"><i class="fas fa-hand-holding-droplet"></i> Connecting Donors. Saving
+                    Lives.</span>
+                <span class="ticker-item"><i class="fas fa-hand-holding-droplet"></i> தானதாரர்களை இணைத்து, உயிர்களை
+                    காப்போம்.</span>
+                <span class="ticker-item"><i class="fas fa-hand-holding-droplet"></i> दानदाताओं को जोड़ते हुए, जीवन
+                    बचाते हैं।</span>
+                <span class="ticker-item"><i class="fas fa-hand-holding-droplet"></i> దాతలను కలుపుతూ, ప్రాణాలను
+                    కాపాడుతూ.</span>
+                <span class="ticker-item"><i class="fas fa-hand-holding-droplet"></i> ദാതാക്കളെ ബന്ധിപ്പിച്ച്, ജീവൻ
+                    രക്ഷിക്കുന്നു.</span>
+                <span class="ticker-item"><i class="fas fa-hand-holding-droplet"></i> ದಾನಿಗಳನ್ನು ಸಂಪರ್ಕಿಸಿ, ಜೀವಗಳನ್ನು
+                    ಉಳಿಸುತ್ತೇವೆ.</span>
+                <span class="ticker-item"><i class="fas fa-hand-holding-droplet"></i> দাতাদের সংযুক্ত করে, জীবন
+                    বাঁচাই।</span>
+                <span class="ticker-item" dir="rtl"><i class="fas fa-hand-holding-droplet"></i> ربط المتبرعين. إنقاذ
+                    الأرواح.</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
